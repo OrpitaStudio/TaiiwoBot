@@ -42,6 +42,8 @@ Edit `config.json` to add optional configuration:
 ### 3. Start the Bot
 The bot will start automatically when you run the repl. The workflow "Discord Bot" runs `python discord_main.py`.
 
+**Important**: The workflow will stay alive even without the API key set. You'll see instructions in the console on how to add the secret. Once you add the `DISCORD_API_KEY` secret, restart the workflow to connect the bot to Discord.
+
 ## Features
 - Plugin system with automatic loading
 - Cross-platform support (Discord and IRC)
@@ -66,8 +68,10 @@ To create new plugins, see the README.md for detailed instructions on the plugin
 - Updated for Replit environment
 - Fixed discord.py 2.6.4 compatibility (removed deprecated `discord.Embed.Empty`)
 - Configured Flask web server on port 5000 for Replit webview
-- Set up environment variable support for API key
+- Set up environment variable support for API key with graceful waiting state when missing
+- Bot now stays alive and displays helpful instructions when API key is not set
 - Created proper Python .gitignore
+- Added comprehensive documentation
 
 ## Architecture
 The bot uses a platform-independent architecture where:
