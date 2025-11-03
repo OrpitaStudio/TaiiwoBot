@@ -3,7 +3,7 @@ from . import irc
 
 
 class Config(dict):
-    def __init__(self, config_location="config.json", key=False):
+    def __init__(self, config_location="config.json", key=None):
         self.config_location = config_location
         self.key = key
         default_config = {
@@ -35,9 +35,13 @@ class Config(dict):
             else:
                 print("[i] A config file is required to run TaiiwoBot")
             quit()
-        default_config[key].update(user_config)
-        for k, v in default_config[key].items():
-            super().__setitem__(k, v)
+        if key:
+            default_config[key].update(user_config)
+            for k, v in default_config[key].items():
+                super().__setitem__(k, v)
+        else:
+            for k, v in user_config.items():
+                super().__setitem__(k, v)
 
     def save_config(self):
         with open(self.config_location, "w") as f:
