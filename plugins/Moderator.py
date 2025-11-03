@@ -13,7 +13,13 @@ class Moderator(Plugin):
         self.discord = discord
         self.asyncio = asyncio
 
-        self.db = self.bot.util.get_db()["admin"]
+        db_client = self.bot.util.get_db()
+        if db_client is None:
+            print("[WARNING] Moderator plugin: MongoDB not available, database features disabled")
+            self.db = None
+            return
+        
+        self.db = db_client["admin"]
 
         async def delete_entry(entry):
             self.db.remove_all(

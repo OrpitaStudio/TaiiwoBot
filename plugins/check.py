@@ -1,12 +1,19 @@
 from taiiwobot.plugin import Plugin
 import requests
-import dwh_hashkit
 import io
+
+try:
+    import dwh_hashkit
+except ImportError:
+    dwh_hashkit = None
 
 
 class Check(Plugin):
     def __init__(self, bot):
         self.bot = bot
+        if dwh_hashkit is None:
+            print("[WARNING] Check plugin: dwh_hashkit module not available, plugin disabled")
+            return
         self.interface = bot.util.Interface(
             "check",
             "Various tools for checking inputs for valid affiliation with 3301",

@@ -52,14 +52,25 @@ The bot will start automatically when you run the repl. The workflow "Discord Bo
 - Web server for health monitoring on port 5000
 
 ## Available Plugins
+### Active Plugins (No external dependencies)
 - Gematria - Cicada 3301 cipher tools
 - LiberPrimus - Cicada 3301 Liber Primus decoder
 - help - Bot command help
 - code - Code execution
 - meme - Meme generation
 - movie - Movie information
-- Moderator - Moderation tools
 - And many more in the `plugins/` directory
+
+### Optional Plugins (Disabled by default)
+These plugins require external services that are not configured:
+- **Moderator** - Requires MongoDB for persistent moderation data
+- **Cookies** - Requires MongoDB for user economy data
+- **LastFm** - Requires MongoDB and Last.fm API key
+- **RSS** - Requires MongoDB for feed subscriptions
+- **Movie** - Requires MongoDB for watchlist features (search still works)
+- **Check** - Requires dwh_hashkit module for Cicada 3301 hash verification
+
+To enable MongoDB-dependent plugins, set up a MongoDB server and update the connection in `taiiwobot/util.py`.
 
 ## Development
 To create new plugins, see the README.md for detailed instructions on the plugin system.
@@ -72,6 +83,9 @@ To create new plugins, see the README.md for detailed instructions on the plugin
 - Bot now stays alive and displays helpful instructions when API key is not set
 - Created proper Python .gitignore
 - Added comprehensive documentation
+- Made MongoDB connections optional - plugins gracefully disable when MongoDB is not available
+- Made check plugin handle missing dwh_hashkit dependency gracefully
+- Bot now runs successfully without any external database dependencies
 
 ## Architecture
 The bot uses a platform-independent architecture where:

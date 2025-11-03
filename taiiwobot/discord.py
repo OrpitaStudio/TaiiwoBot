@@ -29,6 +29,8 @@ class Discord(Server):
         self.followed_messages = {}
         intents = discord.Intents.default()
         intents.members = True
+        intents.message_content = True 
+        # <-- !! ضيف السطر ده
         self.client = discord.Client(intents=intents)
         # self.client = commands.Bot("$", intents=intents)
         # self.slash = SlashCommand(
@@ -61,6 +63,7 @@ class Discord(Server):
 
         @self.client.event
         async def on_message(message):
+            
             # for each message callback
             message_callbacks = self.message_callbacks.copy()
             for callback_id, callback in self.message_callbacks.items():

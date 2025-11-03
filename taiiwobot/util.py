@@ -27,7 +27,13 @@ db = False
 def get_db():
     global db
     if not db:
-        db = pymongo.MongoClient()["taiiwobot"]
+        try:
+            db = pymongo.MongoClient(serverSelectionTimeoutMS=5000)["taiiwobot"]
+            db.command('ping')
+        except Exception as e:
+            print(f"[WARNING] MongoDB not available: {e}")
+            print("[INFO] Database-dependent plugins will be disabled")
+            db = None
     return db
 
 

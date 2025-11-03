@@ -39,7 +39,11 @@ class LastFm(Plugin):
 
         self.api_key = self.bot.config["lastfm_key"]
         self.youtube_key = self.bot.config["youtube_key"]
-        self.db = self.bot.util.get_db()["lastfm"]
+        db_client = self.bot.util.get_db()
+        if db_client is None:
+            print("[WARNING] LastFm plugin: MongoDB not available, plugin disabled")
+            return
+        self.db = db_client["lastfm"]
         # self.bot.config["lastfm"]["api_secret"]
         lastfm = self
 

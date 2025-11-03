@@ -50,6 +50,9 @@ class RSS(Plugin):
         ).listen()
 
         self.db = self.bot.util.get_db()
+        if self.db is None:
+            print("[WARNING] RSS plugin: MongoDB not available, plugin disabled")
+            return
         self.feeds_col = self.db["rss_feeds"]
         self.default_settings = {
             "message": None,

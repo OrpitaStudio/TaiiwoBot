@@ -9,7 +9,11 @@ import asyncio
 class Cookies(Plugin):
     def __init__(self, bot):
         self.bot = bot
-        self.db = self.bot.util.get_db()["cookies"]
+        db_client = self.bot.util.get_db()
+        if db_client is None:
+            print("[WARNING] Cookies plugin: MongoDB not available, plugin disabled")
+            return
+        self.db = db_client["cookies"]
         stock = [
             # emoji, description, price
             ["🥛", "Milk", 5, "FFFFFF"],

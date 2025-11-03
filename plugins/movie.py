@@ -38,7 +38,10 @@ class Movie(Plugin):
         ).listen()
         self.updated_db = False
         self.db_cache = False
-        bot.util.thread(self.loop)
+        if self.db is not None:
+            bot.util.thread(self.loop)
+        else:
+            print("[WARNING] Movie plugin: MongoDB not available, watchlist features disabled")
 
     def root(self, message, *args):
         self.interface.help(message.target, self)
