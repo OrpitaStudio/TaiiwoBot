@@ -8,3 +8,13 @@ discord
 python-dateutil
 dateparser
 Flask
+beautifulsoup4
+dateparser
+discord.py
+feedparser
+Flask
+pymongo
+python-dateutil
+requests
+shodan
+tomd
