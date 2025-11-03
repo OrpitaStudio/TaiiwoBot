@@ -10,7 +10,7 @@ from bson import Int64
 # import discord_slash.error
 from discord.ext import commands
 
-Empty = discord.Embed.Empty
+Empty = None
 
 
 class Discord(Server):
